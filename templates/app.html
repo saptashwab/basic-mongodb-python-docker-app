@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mongo HTML Python Basic App</title>
+  <style>
+    body {
+      background-image: url("{{ url_for('static', filename='45-degree-fabric-dark.png') }}");
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      padding: 50px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      width: 45%;
+    }
+
+    .card h1, .card h2 {
+      margin-bottom: 20px;
+    }
+
+    .card ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .card ul li {
+      margin-bottom: 10px;
+    }
+
+    .card ul li strong {
+      font-weight: bold;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 5px;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Get items
+      $.ajax({
+        url: 'http://localhost:8000/items',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+          $.each(data.items, function(index, item) {
+            $('#items').append('<li>' + '<strong>' + item.name + '</strong>' + ': ' + item.description + '</li>');
+          });
+        }
+      });
+
+      // Add item
+      $('#add-item-form').submit(function(event) {
+        event.preventDefault();
+
+        var name = $('#name').val();
+        var description = $('#description').val();
+
+        if (name.trim() === '' || description.trim() === '') {
+            swal({
+                title: "Error!",
+                text: "Name and description are required.",
+                icon: "error"
+            });
+            return;
+        }
+
+        $.ajax({
+          url: 'http://localhost:8000/items',
+          type: 'POST',
+          dataType: 'json',
+          processData: false,
+          contentType: 'application/json',
+          data: JSON.stringify({ name: name, description: description }),
+          success: function(data) {
+            swal({
+                title: "Item added!",
+                text: "The item has been added successfully.",
+                icon: "success"
+            }).then(function() {
+                window.location.reload();
+            });
+            }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Items</h1>
+      <ul id="items"></ul>
+    </div>
+
+    <div class="card">
+        <h2>Add Item</h2>
+        <form id="add-item-form">
+          <label for="name">Name<span style="color: red">*</span></label>
+          <input type="text" id="name" name="name" required><br>
+      
+          <label for="description">Description<span style="color: red">*</span></label>
+          <textarea id="description" name="description" required></textarea><br>
+      
+          <button type="submit">Add Item</button>
+        </form>
+    </div>
+  </div>
+</body>
+</html>
