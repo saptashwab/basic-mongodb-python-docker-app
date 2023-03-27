@@ -7,3 +7,15 @@ To run the app, just navigate to the folder where the project is in the terminal
 Please note that the application uses 8000 port on the host machine, and nothing should be running on that port.
 
 You can access the app by browsing to http://localhost:8000/ in your browser
+
+## Screenshots
+
+![Scene 1](https://github.com/saptashwab/basic-mongodb-python-docker-app/blob/master/app_images/screen1.png)
+
+![Scene 2](https://github.com/saptashwab/basic-mongodb-python-docker-app/blob/master/app_images/screen2.png)
+
+![Scene 3](https://github.com/saptashwab/basic-mongodb-python-docker-app/blob/master/app_images/screen3.png)
+
+![Scene 4](https://github.com/saptashwab/basic-mongodb-python-docker-app/blob/master/app_images/screen4.png)
+
+![Scene 5](https://github.com/saptashwab/basic-mongodb-python-docker-app/blob/master/app_images/screen5.png)
