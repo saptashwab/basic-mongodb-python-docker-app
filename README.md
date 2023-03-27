@@ -4,4 +4,4 @@ This is a simple app to demonstrate the use of Python and Flask to create REST A
 
 To run the app, just navigate to the folder where the project is in the terminal, and execute the following: `docker-compose up`
 
-Please note that the application uses 8000 port on the host machine, and nothin should be running on that port.
+Please note that the application uses 8000 port on the host machine, and nothing should be running on that port.
